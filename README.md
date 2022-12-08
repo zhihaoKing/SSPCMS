@@ -322,8 +322,9 @@ pdf("Supp_figure1.pdf",w=10,h=8)
    }
 dev.off()
 ```
-Figure1 is shown in results
+Figure1/Supp_figure1 is shown in results
 ![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure1.pdf)
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Supp_figure1.pdf)
 ## Fold change calculating
 ```r
 ###estimate fold change calculating####
@@ -430,6 +431,9 @@ pdf("Figure5.pdf",w=10,h=20)
 corrplot(round(r,2),is.corr=F,addCoef.col = 'black',tl.srt = 45,tl.col='black')
 dev.off()
 ```
+Figure4/Figure5 is shown in results
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure4.pdf)
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure5.pdf)
 ## Circlize
 ```r
 #### circlize plot
@@ -457,8 +461,9 @@ setwd(dir_result)
 pdf("Figure2.pdf",w=5,h=5)
 chordDiagram(mat, grid.col = 1:6, symmetric=TRUE,keep.diagonal=TRUE)
 dev.off()
-
 ```
+Figure2 is shown in results
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure2.pdf)
 ## Benchmark 
 ```r
 res <- rbindlist(res,idcol="ID")   
@@ -573,6 +578,8 @@ pdf("Figure6.pdf",w=8,h=6)
    p
 dev.off()   
 ```
+Figure6 is shown in results
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure6.pdf)
 ## CIBERSORT
 ```r
 ####ESTIMATE results#####
