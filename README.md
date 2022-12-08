@@ -1,6 +1,6 @@
 colorectal cancer CMS single sample predictor
 ==========
-##Set working pathway
+## Set working pathway
 ```r
 rm(list = ls())
 dir_data <- "~/Nutstore\ Files/.symlinks/Nutstore/coad/data"
@@ -321,6 +321,8 @@ pdf("Supp_figure1.pdf",w=10,h=8)
    title(nmi, outer = TRUE,cex.main=1.5)
    }
 dev.off()
+Figure1 is shown in results
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure1.pdf)
 ```
 ## Fold change calculating
 ```r
