@@ -2,15 +2,18 @@ colorectal cancer CMS single sample predictor
 ==========
 ## Set working directory
 ```r
-rm(list = ls())
-dir_data <- "~/Nutstore\ Files/.symlinks/Nutstore/coad/data"
+rm(list=ls())
 setwd(dir_data)
 ```
-## Library R package
+## Load R package
 ```r
-library(Biobase) # if input is ExpressionSet
+library(org.Hs.eg.db)
 library(CMScaller)
+library(estimate)
+library(circlize)
+library(data.table)
 library(dplyr)
+library(Biobase) # if input is ExpressionSet
 library(irlba)
 library(Matrix)
 library(parallel)
@@ -19,7 +22,6 @@ library(tidyr)
 library(threejs)
 library(clusterProfiler)
 library(DOSE)
-library(org.Hs.eg.db)
 library(IOBR)
 library(data.table)
 library(ggplot2)
@@ -28,9 +30,16 @@ library(table1)
 library(ggVennDiagram)
 library(estimate)
 library(ComplexHeatmap)
-library(circlize)
+library(CMSclassifier)
+library(corrplot)
+library(gridExtra)
+library(enrichplot)
+library(ggupset)
+library(RISmed)
+library(WGCNA)
+library(caret)
 ```
-## Function subHeatmap1
+## Data process
 ```r
 subHeatmap1 <- function (emat, res, templates, keepN = TRUE, 
     classCol = getOption("subClassCol"), featureCol = getOption("subClassCol"), heatCol = NULL, ...) 
