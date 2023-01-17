@@ -1,6 +1,6 @@
 colorectal cancer CMS single sample predictor
 ==========
-## Set working pathway
+## Set working directory
 ```r
 rm(list = ls())
 dir_data <- "~/Nutstore\ Files/.symlinks/Nutstore/coad/data"
