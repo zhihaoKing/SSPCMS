@@ -1,4 +1,4 @@
-colorectal cancer CMS single sample predictor
+Colorectal Cancer Consensus molecular subtype(CMS) single sample predictor(SSP)
 ==========
 ## Set working directory
 ```r
