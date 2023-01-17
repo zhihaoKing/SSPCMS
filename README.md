@@ -313,59 +313,8 @@ pdf("Supp_figure 1-10.pdf",w=10,h=8)
 dev.off()
 ```
 Figure 3/Supp_figure 1-10 is shown in result
-![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%201.png)
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%203.png)
 
-## Heatmap
-```r
-###data processing###
-f0 <- c("TCGA(COAD)","TCGA(READ)","GSE14333","GSE143985",
-       "GSE161158","GSE17536","GSE38832","GSE87211",
-       "GSE17537","GSE39582","GSE171680")##3 RNA-seq datasets, 8 microarray datasets
-title <- as.list(c("TCGA-COAD","TCGA-READ","GSE14333","GSE143985","GSE161158","GSE17536",
-                   "GSE38832","GSE87211","GSE17537","GSE39582","GSE171680"))
-f1 <- paste0("meta_",f0,"_dfs.csv")
-names(f1) <- f0
-meta <- lapply(f1,fread)
-
-#meta <- rbindlist(meta,use.names=TRUE)
-f2 <- paste0("exp_",f0,".csv")
-names(f2) <- f0
-ex <- lapply(f2,fread)
-
-for(i in seq(ex))
-{
-  ex[[i]][,V1:=as.character(V1)]
-  ex[[i]][,V1:=strsplit(V1,"///",fixed=TRUE)]
-  ex[[i]] <- ex[[i]] %>% unnest(V1) %>% as.data.table(.)
-}
-
-for(i in c(3,6,7,9:11))
-{
-  ex[[i]][,V1:=mapIds(org.Hs.eg.db,V1,'ENTREZID', 'SYMBOL')]
-}
-#for(i in c(3))
-#{
-  #ex[[i]][,V1:=mapIds(org.Hs.eg.db,V1,'ENTREZID', 'ENSEMBL')]
-#}
-
-for(i in seq(ex))
-  ex[[i]] <- na.omit(ex[[i]])
-
-for(i in seq(ex))
-{
-  ex[[i]] <- ex[[i]][,lapply(.SD,sum),by=V1,.SDcols=names(ex[[i]])[!names(ex[[i]])=="V1"]]
-  nms <- ex[[i]][,V1]
-  ex[[i]] <- as.matrix(ex[[i]][,-"V1"])
-  rownames(ex[[i]]) <- nms
-}
-
-
-for(i in c(1,2))
-  ex[[i]] <- process(ex[[i]],isCounts=TRUE)
-
-for(i in c(3:11))
-  ex[[i]] <- process(ex[[i]],isCounts=FALSE)
-```
 ## Circlize
 ```r
 templates <- CMScaller::templates.CMS
@@ -388,8 +337,12 @@ l <- lapply(l,function(x) x$symbol)
 mat=crossprod(table(stack(l)))
 names( attr(mat, "dimnames")) <- NULL
 
+pdf("Figure 2.pdf",w=5,h=5)
 chordDiagram(mat, grid.col = 1:6, symmetric=TRUE,keep.diagonal=TRUE)
+dev.off()
 ```
+Figure 2 is shown in result
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%202.png)
 ## K-M plot
 ```r
 rm(list=ls())
@@ -487,9 +440,9 @@ pdf("Figure 4.pdf",w=5,h=5)
 ggsurv
 dev.off()
 ```
-Figure1/Supp_figure1 is shown in results
-![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure1.pdf)
-![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Supp_figure1.pdf)
+Figure 4 is shown in results
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%204.png)
+
 ## Customized framework
 ```r
 rm(list=ls())
@@ -624,9 +577,9 @@ pdf("Figure 5.pdf",w=10,h=20)
 corrplot(round(r,2),is.corr=F,addCoef.col = 'black',tl.srt = 45,tl.col='black')
 dev.off()
 ```
-Figure4/Figure5 is shown in results
-![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure4.pdf)
-![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure5.pdf)
+Supp_Figure 12/Figure 5 is shown in results
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Supp_Figure%2012.png)
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%205.png)
 ## Functional enrichment analysis
 ```r
 rm(list=ls())
@@ -754,8 +707,8 @@ write.csv(GO,"Supp_Table 3.csv")
 KEGG <- kegg@result
 write.csv(KEGG,"Supp_Table 4.csv")
 ```
-Figure2 is shown in results
-![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure2.pdf)
+Figure 6 is shown in results
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%206.png)
 ## 100 novel biomarkers literature mining 
 ```r
 rm(list=ls())
@@ -857,8 +810,6 @@ countss <- countss[order(counts,decreasing = TRUE), ]
 countss$symbol <- as.character(countss$symbol)
 write.csv(countss,"table 3.csv")
 ```
-Figure6 is shown in results
-![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure6.pdf)
 ## 10 key driver genes literature mining
 ```r
 x <- c("(CCL20) AND","(CCL4) AND","(CCL18) AND","(CCL8) AND","(CXCL10) AND",
@@ -913,6 +864,8 @@ pdf("Figure 7.pdf",w=10,h=20)
 corrplot(round(lit,2),is.corr=F,addCoef.col = 'black',tl.srt = 45,tl.col='black')
 dev.off()
 ```
+Figure 7 is shown in result
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%207.png)
 ## Benchmark
 ```r
 rm(list=ls())
@@ -1028,6 +981,8 @@ pdf("Figure 8.pdf",w=8,h=6)
    p
 dev.off()   
 ```
+Figure 8 is shown in result
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%208.png)
 ## Relative expression of 10 genes 
 ```r
 rm(list=ls())
@@ -1116,8 +1071,10 @@ for(i in c(1:11))
   scale_fill_manual(values=c("red","blue"))
  
 setwd(dir_result)
-pdf("Supp_figure 13.pdf",w=6,h=30) 
+pdf("Supp_Figure 13.pdf",w=6,h=30) 
 plot_grid(g_box[[1]],g_box[[2]],g_box[[3]],g_box[[4]],g_box[[5]],g_box[[6]],g_box[[7]],
           g_box[[8]],g_box[[9]],g_box[[10]],g_box[[11]],ncol = 1)
 dev.off()
 ```
+Supp_Figure 13 is shown in result
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Supp_Figure%2013.png)
