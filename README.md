@@ -312,6 +312,9 @@ pdf("Supp_figure 1-10.pdf",w=10,h=8)
    }
 dev.off()
 ```
+Figure 3/Supp_figure 1-10 is shown in result
+![Image text](https://github.com/zhihaoKing/SSPCMS/blob/main/result/Figure%201.png)
+
 ## Heatmap
 ```r
 ###data processing###
